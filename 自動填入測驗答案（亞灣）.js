@@ -1,8 +1,6 @@
 // ==UserScript==
 // @name         自動填入測驗答案（亞灣）
-// @match        https://www.asiabaykh.com/exam/1
-// @match        https://www.asiabaykh.com/exam/2
-// @match        https://www.asiabaykh.com/exam/3
+// @match        https://www.asiabaykh.com/exam/*
 // @grant        none
 // ==/UserScript==
 
@@ -26,7 +24,7 @@
         /*11*/ 11: [1],/*12*/ 12: [4],/*13*/ 13: [2],/*14*/ 14: [5],/*15*/ 15: [1]
     };
 
-    window.addEventListener('load', () => {
+    function fillAnswers() {
         Object.entries(answers).forEach(([qId, choices]) => {
             choices.forEach(val => {
                 const selector = `input[name="answer[${qId}][]"][value="${val}"]`;
@@ -34,5 +32,21 @@
                 if (checkbox) checkbox.checked = true;
             });
         });
+    }
+
+    function autoSubmit() {
+        // 滾動到底
+        window.scrollTo(0, document.body.scrollHeight);
+
+        // 精準選擇「送出」按鈕
+        const submitBtn = document.querySelector('button.next-button');
+        if (submitBtn) {
+            setTimeout(() => submitBtn.click(), 500); // 延遲 0.5 秒點擊
+        }
+    }
+
+    window.addEventListener('load', () => {
+        fillAnswers();
+        setTimeout(autoSubmit, 500); // 填好再送出
     });
 })();
