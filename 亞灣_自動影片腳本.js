@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         亞灣_自動影片腳本
+// @name         自動影片腳本(亞灣)
 // @namespace    http://tampermonkey.net/
 // @version      1.2
 // @description  自動將影片進度條拉到最後，不需等待加載完畢
