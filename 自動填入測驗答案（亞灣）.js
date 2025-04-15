@@ -41,7 +41,9 @@
         // 精準選擇「送出」按鈕
         const submitBtn = document.querySelector('button.next-button');
         if (submitBtn) {
-            setTimeout(() => submitBtn.click(), 500); // 延遲 0.5 秒點擊
+            setTimeout(() => {
+                submitBtn.click();
+            }, 500);
         }
     }
 
