@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      1.2
 // @description  自動將影片進度條拉到最後，不需等待加載完畢
-// @match        *://*/*
+// @match        https://www.asiabaykh.com/study/*
 // @grant        none
 // ==/UserScript==
 
@@ -20,6 +20,6 @@
         });
     }
 
-    // 每秒執行一次，讓影片即使未加載完成也會嘗試跳到最後
+    // 每0.1秒執行一次，讓影片即使未加載完成也會嘗試跳到最後
     setInterval(skipToEnd, 100);
 })();
