@@ -49,7 +49,7 @@
     }
     function checkExamRedirect() {
         const currentPath = window.location.pathname;
-        if (currentPath.includes("/exam/2576/score") || currentPath.includes("/exam/2577/score") || currentPath.includes("/exam/2578/score")) {
+        if (currentPath.includes("/score") || currentPath.includes("/exam/2577/score") || currentPath.includes("/exam/2578/score")) {
             console.log("偵測到特殊測驗頁面，將在 1 秒後跳回 /account/my-course");
             setTimeout(() => {
             window.location.href = "/account/my-course";
