@@ -49,15 +49,15 @@
     }
     function checkExamRedirect() {
         const currentPath = window.location.pathname;
-        if (currentPath.includes("/score") || currentPath.includes("/exam/2577/score") || currentPath.includes("/exam/2578/score")) {
+        if (currentPath.includes("/score")) {
             console.log("偵測到特殊測驗頁面，將在 1 秒後跳回 /account/my-course");
             setTimeout(() => {
             window.location.href = "/account/my-course";
-            }, 700);
+            }, 600);
         }
     }
     window.addEventListener('load', () => {
-        setTimeout(500);
+        setTimeout(300);
         fillAnswers();
         setTimeout(autoSubmit, 500); // 填好再送出
         checkExamRedirect();
