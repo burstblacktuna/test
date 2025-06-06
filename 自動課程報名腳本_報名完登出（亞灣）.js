@@ -1,19 +1,23 @@
 // ==UserScript==
-// @name         自動課程報名腳本_報名完登出（亞灣）
+// @name         自動課程報名腳本（按順序報名後登出）
 // @match        https://www.asiabaykh.com/course/*
-// @match        https://www.asiabaykh.com/course
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
+    // 定義課程順序
+    const courseSequence = ["/course/1", "/course/2", "/course/3", "/course/4"];
+    const currentPath = window.location.pathname;
+
     async function registerCourse() {
-        console.log("偵測到課程頁面，開始報名流程");
+        console.log(`偵測到 ${currentPath} 頁面，開始報名流程`);
 
         // 立即關閉可能出現的彈窗
         document.querySelectorAll('.swal2-confirm.swal2-styled').forEach(btn => btn.click());
 
+        // 找到報名按鈕並點擊
         const applyButton = document.querySelector('[onclick="courseApply()"]');
         if (applyButton) {
             applyButton.click();
@@ -23,8 +27,9 @@
             return; // 退出流程
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 等待彈窗出現
+        await new Promise(resolve => setTimeout(resolve, 600)); // 等待彈窗出現
 
+        // 點擊確認按鈕
         /*const confirmButton = document.querySelector('.swal2-confirm.swal2-styled.swal2-default-outline');
         if (confirmButton) {
             confirmButton.click();
@@ -34,15 +39,17 @@
             return; // 退出流程
         }
 
-        await new Promise(resolve => setTimeout(resolve, 100)); // 等待操作完成
-*/
-        // 檢查是否在 /course/4 頁面，若是則跳轉至登出
-        if (window.location.pathname === "/course/4") {
+        await new Promise(resolve => setTimeout(resolve, 500)); // 等待操作完成
+        */
+        // 計算下一個課程
+        const currentIndex = courseSequence.indexOf(currentPath);
+        if (currentIndex >= 0 && currentIndex < courseSequence.length - 1) {
+            const nextCourse = courseSequence[currentIndex + 1];
+            window.location.href = nextCourse;
+            console.log(`報名完畢，跳轉至 ${nextCourse}`);
+        } else {
             window.location.href = "/logout";
             console.log("報名完畢，跳轉至登出頁面");
-        } else {
-            window.location.href = "/course"; // 回到課程總覽
-            console.log("報名完畢，返回課程總覽");
         }
     }
 
