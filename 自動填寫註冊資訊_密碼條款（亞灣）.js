@@ -15,7 +15,7 @@
         document.getElementById('password').value = 'a38708242';
         document.getElementById('password_confirmation').value = 'a38708242';
 
-        // 勾選同意條款
+        // 勾選同意條款 
         const agreeCheckbox = document.getElementById('agree');
         if (agreeCheckbox) agreeCheckbox.checked = true;
 
