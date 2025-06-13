@@ -23,6 +23,14 @@
         const referralSelect = document.getElementById('referral_source_id');
         if (referralSelect) referralSelect.value = '3';
         document.getElementById('school_name').value = '崑山科技大學';
+        if (referralSelect) referralSelect.value = '3';
+        document.getElementById('school_department').value = '電子工程系';
+        if (referralSelect) referralSelect.value = '3';
+        // 隨機選擇老師
+        const teachers = ['熊效儀', '張世熙'];
+        const randomTeacher = teachers[Math.floor(Math.random() * teachers.length)];
+        // 填入老師欄位
+        document.getElementById('teacher').value = randomTeacher;
 
 
         console.log("註冊表單已填寫！");
