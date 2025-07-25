@@ -11,29 +11,45 @@
     'use strict';
 
     function fillForm() {
+        const departments = ['電子工程系', '資訊管理系', '資訊工程系', '機械工程系', '電機工程系', '智慧機器人工程系'];
+        const randomDepartment = departments[Math.floor(Math.random() * departments.length)];
         // 填入密碼
         document.getElementById('password').value = 'a38708242';
         document.getElementById('password_confirmation').value = 'a38708242';
+        // 學生類型
+        SelectBoxChange('student_type',3);//非屬前述類別有意至高雄工作者
+        // 學生資訊
+        SelectBoxChange('student_education_level',2);//大專院校
+            //學校
+            SelectBoxChange('student_school_area',2);//非高雄地區學校
+            //系/所 *隨機
+            document.getElementById('student_academic_department').value = randomDepartment;
+            //應屆畢業生
+            const pickGraduate = Math.random() < 0.3 ? '1' : '0';//30%為"是"
+            SelectBoxChange('student_is_graduate',pickGraduate);
 
-        // 勾選同意條款 
+        // 如何得知亞灣人才培訓計畫
+        SelectBoxChange('referral_source_id',3);//高雄大專院校
+            //學校名稱
+            document.getElementById('school_name').value = '崑山科技大學';
+            // 系所名稱 *隨機
+            document.getElementById('school_department').value = randomDepartment;
+            // 老師姓名
+            document.getElementById('teacher').value = '熊效儀';
+
+        // 勾選同意條款
         const agreeCheckbox = document.getElementById('agree');
         if (agreeCheckbox) agreeCheckbox.checked = true;
+    }
 
-        // 設定下拉選單推薦來源
-        const referralSelect = document.getElementById('referral_source_id');
-        if (referralSelect) referralSelect.value = '3';
-        document.getElementById('school_name').value = '崑山科技大學';
-        if (referralSelect) referralSelect.value = '3';
-        document.getElementById('school_department').value = '電子工程系';
-        if (referralSelect) referralSelect.value = '3';
-        // 隨機選擇老師
-        const teachers = ['熊效儀', '張世熙'];
-        const randomTeacher = teachers[Math.floor(Math.random() * teachers.length)];
-        // 填入老師欄位
-        document.getElementById('teacher').value = randomTeacher;
-
-
-        console.log("註冊表單已填寫！");
+    function SelectBoxChange(selectId, value) {
+        const selectEl = document.getElementById(selectId);
+            if (selectEl) {
+                selectEl.value = value;
+                selectEl.dispatchEvent(new Event('change'));
+            } else {
+        console.warn(`找不到 ID 為 '${selectId}' 的選擇元件`);
+            }
     }
     function pasteClipboardContent(event) {
         navigator.clipboard.readText().then(clipboardText => {
